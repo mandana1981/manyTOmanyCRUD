@@ -19,7 +19,7 @@ public class Role {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
     private List<User> users=new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "ROLE_PERMISSION",
     joinColumns = {@JoinColumn(name = "ROLE_ID")},
     inverseJoinColumns = {@JoinColumn(name = "PERMISSION_ID")})

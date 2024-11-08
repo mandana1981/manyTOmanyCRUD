@@ -14,10 +14,11 @@ public class Permission {
     private int id;
     @Column(name = "PERMISSION_NAME")
     private String name;
-    public Permission() {}
 
-@ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
     private List<Role> roles=new ArrayList<>();
+
+    public Permission() {}
 
     public Permission(int id, String name) {
         this.id = id;

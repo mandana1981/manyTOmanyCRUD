@@ -3,7 +3,9 @@ package ca.sematec.mtm.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "ROLE")
@@ -16,14 +18,12 @@ public class Role {
     @Column(name = "ROLE_NAME")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-    private List<User> users=new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "ROLE_PERMISSION",
     joinColumns = {@JoinColumn(name = "ROLE_ID")},
     inverseJoinColumns = {@JoinColumn(name = "PERMISSION_ID")})
-    private List<Permission> permissions=new ArrayList<>();
+    private Set<Permission> permissions=new HashSet<>();
 
 
      public Role() {}
@@ -47,5 +47,14 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public Set<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
     }
 }
